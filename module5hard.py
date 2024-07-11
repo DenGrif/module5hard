@@ -1,4 +1,5 @@
 import hashlib
+import time
 
 class User:
     def __init__(self, nickname, password, age):
@@ -61,12 +62,12 @@ class UrTube:
 
                 for second in range(video.time_now, video.duration):
                     print(f"Просмотр видео {title}: секунда {second + 1}")
+                    time.sleep(1)
                 video.time_now = 0
                 print("Конец видео")
                 return
         print(f"Видео с названием '{title}' не найдено")
 
-# Пример выполнения программы
 ur = UrTube()
 v1 = Video('Лучший язык программирования 2024 года', 200)
 v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
