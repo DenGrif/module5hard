@@ -42,7 +42,7 @@ class UrTube:
 
     def add(self, *videos):
         for video in videos:
-            if all(existing_video.title != video.title for existing_video in self.videos):
+            if not any(v.title == video.title for v in self.videos):
                 self.videos.append(video)
 
     def get_videos(self, search_word):
@@ -60,13 +60,13 @@ class UrTube:
                     print("Вам нет 18 лет, пожалуйста покиньте страницу")
                     return
 
-                for second in range(video.time_now, video.duration):
-                    print(f"Просмотр видео {title}: секунда {second + 1}")
+                for i in range(video.time_now + 1, video.duration + 1):
+                    print(i, end=' ', flush=True)
                     time.sleep(1)
                 video.time_now = 0
                 print("Конец видео")
                 return
-        print(f"Видео с названием '{title}' не найдено")
+        print("Видео не найдено")
 
 ur = UrTube()
 v1 = Video('Лучший язык программирования 2024 года', 200)
@@ -92,3 +92,4 @@ print(ur.current_user.nickname)  # vasya_pupkin
 
 # Попытка воспроизведения несуществующего видео
 ur.watch_video('Лучший язык программирования 2024 года!')  # Видео с названием 'Лучший язык программирования 2024 года!' не найдено
+
